@@ -1,0 +1,25 @@
+body{
+			background-color:#A2CD5A;
+			padding: 10px 15px;	/* superior esquerda inferior direita */	
+			line-height:30px;/*espaco entre linhas*/
+	}
+
+h1{
+			color: white;
+			text-align:center;
+
+}
+
+label { 
+			font-weight:bold;
+	  }
+
+#qual  {
+			padding: 0px 0px 20px 0px;
+	   }
+
+#botao { 
+    		width: 80px;  
+     		height: 30px;  
+    		font-family: verdana;  
+    	}

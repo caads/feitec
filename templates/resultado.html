@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Consultar Participante </center>
+{% endblock subtitle %}
+{% block conteudo %}     
+        {% for dados in part %}
+		    <a href="/emitir/{{dados.codIntregante}}/">{{ dados.nomeIntregante }}
+            </a> PDF certificado<br><br>
+        {% endfor %}
+{% endblock %}

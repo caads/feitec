@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Consultar Cadastro </center>
+{% endblock subtitle %}
+{% block conteudo %}
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+		<form id="form" action="/resultado_esqueci/" method="post">{% csrf_token %} 
+        	<label for="codigo">Digite o email para ser enviado uma nova senha:</label><br />
+            <input type="text" id="email" name="email" size="50" maxlength="50"/>
+			<input id="botao" type="submit" name="Submit" value="Enviar">
+        </form>
+  		<p><strong>{{ mensagem }}</strong></p>
+	<p><a href="/login/" class="button">Clique aqui</a> para voltar a tela de acesso</p>
+{% endblock %}

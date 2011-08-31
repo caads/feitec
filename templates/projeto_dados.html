@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Alterar Dados do Projeto </center>
+{% endblock subtitle %}
+{% block conteudo %}
+<form id="form" name="form" action="/mostra_dados_projeto/{{ codigo }}/" method="POST">{% csrf_token %}
+            <h1>Alterar Dados do Projetos</h1>	
+			{{form.non_field_errors}}
+			<div class="field">
+        		{{ form.area.errors }}
+       			<label for="area">Área:</label>
+					<div class="area" id="area">        	
+	            		{{ form.area}}
+    				</div>
+			</div>
+
+			<div class="field" >
+       			<label for="nomeProj">Nome:</label>
+					<div class="campo" id="nomeProj">        		
+						{{form.nomeProj}}
+					</div>		
+			</div>
+    		
+			<div class="field">
+        		{{ form.resumo.errors }}
+        		<label  for="resumoProj">Resumo:</label>
+					<div class="campo" id="resumoProj">    
+						{{form.resumoProj}}
+    				</div>
+   			</div>
+
+			<div class="field">
+        		{{ form.materialProj.errors }}
+        		<label for="materialProj">Material do Projeto:</label>
+					<div class="campo" id="materialProj">        		
+						{{ form.materialProj }}
+    				</div>
+			</div>
+	
+			<div class="field">
+        		{{ form.campus.errors }}
+       			<label for="campusProj">Campus:</label>
+					<div class="campus" id="campusProj">        	
+	            		{{ form.campusProj}}
+    				</div>
+			</div>
+			
+			<div class="field">
+        		{{ form.materialAV.errors }}
+       			<label for="materialAVProj">Material Áudio Visual:</label>
+					<div class="materialAV" id="materialAVProj">        	
+	            		{{ form.materialAVProj}}
+    				</div>
+			</div>
+			<br />
+
+
+			{{ form.codProj }}
+			{{ form.situacao}}
+			{{ form.criador}}
+			{{form.salaProj}}
+            {{form.blocoProj}}
+			
+			<h3>Cadastro de Professores e Coordenadores</h3>
+			<div>
+				{{ formset2.management_form }}
+    			{% for professor in formset2.forms %}
+       	 			<ul>
+						{{ professor.codProfessor }}
+            			<li>Participação : {{ professor.tipo }}</li>
+            			<li>Nome : {{ professor.nomeProfessor }}</li>
+						<li>Email : {{ professor.emailProfessor }}</li>
+        			</ul>
+    			{% endfor %}
+			</div>
+            
+            <h3>Integrantes</h3>
+			<div>
+				{{ formset.management_form }}
+    			{% for integrante in formset.forms %}
+       	 			<ul>
+						{{ integrante.codIntregante }}
+            			<li>Nome : {{ integrante.nomeIntregante }}</li>
+            			<li>CPF : {{ integrante.cpfIntegrante }}</li>
+						<li>Curso : {{ integrante.cursoIntegrante }}</li>
+						<li>Tamanho Camisa : {{ integrante.tamanhocamisa }}</li>
+        			</ul>
+    			{% endfor %}
+			</div><br />
+
+			<p><input id="botao" type="button" name="Submit" value="Salvar" onclick="validaCamposS();">
+			- <input id="botao" type="button" name="Submit" value="Enviar" onclick="validaCamposE();">
+            - <a href="/apagar_projeto/{{ codigo }}/"><input id="botao" type="button" name="Submit" value="Apagar"></a><br />
+            - <a href="/principal"><input id="botao" type="button" name="Submit" value="Voltar"></a></p>
+</form>
+{% endblock %}

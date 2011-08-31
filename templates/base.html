@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <head>
+        <title>
+            {% block titulo %} Feitec - Semana do Saber {% endblock %}
+        </title>
+        {% block style %}
+            <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}style.css" media="screen"/>
+        {% endblock style %}
+        {% block scripts %}
+            <script type="text/javascript" src="{{MEDIA_URL }}validarFeitec.js"></script>
+        {% endblock scripts %}
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="header">
+                <div id="logo">
+		            <!--<h1><a href="home"> Semana do Saber </a></h1>-->
+	            </div> <!-- end #logo -->
+	            <div id="menu">
+		            <ul>
+                        <li class="active"><a href="/principal/">Página Inicial</a></li>
+                        <li class="active"><a href="http://saberfazersaber.iff.edu.br">Semana do Saber</a></li>
+                        <li class="active"><a href="http://portal.iff.edu.br">Portal do IFF</a></li>
+                        {% if user.is_authenticated %}
+                            <li> <b>Bem vindo(a), {{ user }}!</b> </li>
+                            <li class="active"><a href="/mudar_senha/">Mudar Senha</a></li>
+                            <li class="active"><a href="/logout/">Logout</a></li>
+                        {% else %}
+                            <li class="active"><a href="/cadastrar/">Cadastrar-se</a></li>
+                            <li class="active"><a href="/login/">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div> <!-- end #menu -->
+            </div> <!-- end #header -->
+            <div id="page">
+	            <div id="header-pic"></div>
+	                <div id="content">
+		                <div class="post">
+			            <h2 class="title"> {% block subtitle %}{% endblock subtitle %} </h2>
+                            <div class="entry">
+                                <center>                                
+                                    <br></br><img src="{{ MEDIA_URL }}iff.gif" alt="IFF" title="Instituto Federal Fluminense"/>
+                                    <!--<img src="{{ MEDIA_URL }}cads.png" alt="CADS" title="Coordenação de Administração e Desenvolvimento de Sistemas"/></br>--></br>
+                                    <br/>
+                                    </br></br><h1><b>FEITEC</b></h1>
+                                    <h3>Semana do Saber Fazer Saber</h3>
+                                    <h4>7 a 9 de setembro de 2011</br></h4></br>
+                                    {% block conteudo %}{% endblock %}
+                                </center>
+                            </div>
+                        </div>
+                    </div> <!-- end #content -->
+                    <div id="sidebar">
+                        <div id="sidebar-bgtop"></div>
+                            <div id="sidebar-content">
+                                <div id="sidebar-bgbtm">
+                                    <ul>
+                                        <li id="search">
+                                            <h2>Login</h2>
+                                            <center>
+                                                {% if user.is_authenticated %}
+                                                    <h3> Bem vindo(a), {{usuario}}! </h3>
+                                                    <a href="/logout/" class="button">Clique aqui</a> para sair da sua conta </br></br>
+                                                    <p><a href="/mudar_senha/">Clique aqui</a> para mudar sua senha </br></br>
+                                                {% else %}
+                                                    Faça Login ou Cadastre-se no formulário ao lado.
+                                                {% endif %}
+                                            </center>
+                                        </li>
+                                    </ul>
+		                        </div>
+                            </div>
+                    </div> <!-- end #sidebar -->
+                    <div style="clear:both; margin:0;"></div>
+                </div> <!-- end #page -->
+            </div>
+            <div id="footer">
+	            <p> &copy; Coordenação Adjunta de Administração e Desenvolvimento de Sistemas - DTIC<br>IFF Campos-Centro.
+                <a href="http://www.djangoproject.com/"> Made with Django. </a></p>
+            </div> <!-- end #footer -->
+    </body>
+</html>   

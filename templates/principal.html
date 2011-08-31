@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Pagina Principal </center>
+{% endblock subtitle %}
+{% block conteudo %}
+{% if nome == 'gerencia' %}
+    <h3>Selecione a área do projeto para Avaliação:</h3>
+    {% for dados in area %}
+        <p><a href="/filtrar_area_gerencia/{{dados.codArea}}/">{{ dados.descricao }}</a></p>
+    {% endfor %}
+    <p><h4>Total de Projetos Aprovado até agora: {{ cont }}</h4></p>
+    <p><a href="/principal_certificado"><input id="botao" type="button" name="Submit" value="Certificados"></a></p>
+{% else %}
+    <form id="formPrincipal" name="formPrincipal" action="/" method="POST" onsubmit="validaPrincipal();">{% csrf_token %}
+	    <p><h3>Cadastro de um Novo Projeto</h3></p>
+	    <b>Quantidade de alunos do projeto:</b><br/>
+	    <input type="text" name="integrante" value = 1 onKeyPress="return Apenas_Numeros(event)" ><br />
+		<b>Quantidade de professores do projeto:</b><br/>
+		<input type="text" name="professor" value = 1 onKeyPress="return Apenas_Numeros(event)" ><br />
+		</br><input id="botao" type="button" name="Submit" value="Cadastrar um Novo Projeto" onclick="validaPrincipal();">
+	</form><br>
+    {% if projeto %}
+	    <FONT face= "Arial " SIZE=3 COLOR= "#000000 ">Meus Projetos:</FONT>	
+	    {% for dados in projeto %}
+		    {% if dados.situacao == "Salvo" %}
+			    <p>
+			    <a href="/numerar_participantes/{{ dados.codProj }}/">{{ dados.nomeProj }}</a>
+			    Situação do Projeto  = {{ dados.situacao }}
+			    </p>
+		    {% else %}
+			    <p>
+			    <a href="/projeto/{{ dados.codProj }}/">{{ dados.nomeProj }}</a>
+			    Situação do Projeto  = {{ dados.situacao }}
+			    </p>
+		    {% endif %}
+	    {% endfor %}
+    {% endif %}
+{% endif %}
+{% endblock %}

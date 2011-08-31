@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Pagina Principal </center>
+{% endblock subtitle %}
+{% block conteudo %}
+<h3> Projeto Feitec: </h3> 
+<p><b>Nome:</b> {{ projeto.nomeProj }}</p>
+<p><b>Área:</b> {{ projeto.area }}</p>
+<p><b>Campus:</b> {{ projeto.campusProj }}</p>
+<p><b>Sala:</b> {{ projeto.salaProj }}</p>
+<p><b>Bloco:</b> {{ projeto.blocoProj }}</p>
+<p><b>Resumo:</b> {{ projeto.resumoProj }}</p>
+<p><b>Material a ser Adquirido:</b> {{ projeto.materialProj }}</p>
+<p><b>Equipamento Necessário:</b> {{ projeto.equipamentoProj }}</p>
+<p>{% if professor %}
+    <h3> Professores: </h3>   
+	{% for dados in professor %}       
+        <p>         
+		<b>Nome :</b> {{ dados.nomeProfessor }}</br>
+        <b>Email :</b> {{ dados.emailProfessor }}</br>
+        <b>Tipo :</b> {{ dados.tipoProfessor}}</br>
+        <b>Matrícula SIAPE :</b> {{ dados.matriculaProfessor }}</br>
+		</p> 
+    {% endfor %}
+{% endif %}</p> 
+<p>{% if integrante %}
+    <h3> Integrantes: </h3>  
+	{% for dados in integrante %}
+        <p> 
+		<b>Nome :</b> {{ dados.nomeIntegrante }}</br>
+        <b>CPF :</b> {{ dados.cpfIntegrante }}</br>
+        <b>Curso :</b> {{ dados.cursoIntegrante }}</br>
+        <b>Matrícula :</b> {{ dados.matriculaIntegrante }}</br>
+        <b>Campus :</b> {{ dados.campusIntegrante }}</br>
+		<b>Tamanho Camisa :</b> {{ dados.tamanhocamisaIntegrante }}</br>
+        </p>
+	{% endfor %}
+{% endif %}</p>
+    <form id="formPrincipal" name="formPrincipal" action="/criar_alterar/{{ codigo }}/" method="POST" onsubmit="validaPrincipal();">{% csrf_token %}
+	    <p><h3>Adicionar Participantes</h3></p>
+	    Quantos alunos serão adicionados??<br />
+	    <input type="text" name="integrante" value = 0 onKeyPress="return Apenas_Numeros(event)" ><br/>
+		Quantos professores serão adicionados?<br />
+		<input type="text" name="professor" value = 0 onKeyPress="return Apenas_Numeros(event)" ><br/>
+		</br><input id="botao" type="button" name="Submit" value="Alterar Projeto" onclick="validaPrincipal();"><br/>
+	</form>
+    <a href="/principal"><input id="botao" type="button" name="Submit" value="Voltar"></a>
+{% endblock %}

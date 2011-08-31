@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Gerencia - Avaliação </center>
+{% endblock subtitle %}
+{% block conteudo %}
+<script type="text/javascript" src="{{MEDIA_URL}}validarFeitec.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<h2>Nome do Projeto : {{ projeto.nomeProj }}</h2>
+
+<p>Área:{{ projeto.area }}</p>
+<p>Campus: {{ projeto.campusProj }}</p>
+<p>Resumo: {{ projeto.resumoProj }}</p>
+<p>Material a ser Adquirido:{{ projeto.materialProj }}</p>
+<p>Equipamento Necessário : {{ projeto.equipamentoProj }}</p>
+
+<p>{% if professor %}
+    <h3> Professores: </h3>   
+	{% for dados in professor %}       
+        <p><ul>         
+		<li>Nome : {{ dados.nomeProfessor }}</li>
+        <li>Email : {{ dados.emailProfessor }}</li>
+        <li>Tipo : {{ dados.tipoProfessor}}</li>
+        <li>Matrícula Isape : {{ dados.matriculaProfessor }}</li>
+		</ul></p> 
+    {% endfor %}
+{% endif %}</p>
+        
+<p>{% if integrante %}
+    <h3> Integrantes: </h3>  
+	{% for dados in integrante %}
+        <p><ul> 
+		<li>Nome : {{ dados.nomeIntegrante }}</li>
+        <li>CPF : {{ dados.cpfIntegrante }}</li>
+        <li>Curso : {{ dados.cursoIntegrante }}</li>
+        <li>Matrícula : {{ dados.matriculaIntegrante }}</li>
+		<li>Curso : {{ dados.cursoIntegrante }}</li>
+        <li>Campus : {{ dados.campusIntegrante }}</li>
+		<li>Tamanho Camisa : {{ dados.tamanhocamisaIntegrante }}</li>
+         <li>Situação : {{ dados.situacaoIntegrante }}
+        </ul></p>
+	{% endfor %}
+{% endif %}</p>
+
+<form id="formBloco" name="formBloco" action="/editar_gerencia2/{{ codigo }}/" method="POST">{% csrf_token %}
+    <p><div class="field">
+		<label for="bloco">Bloco:</label>
+		<div class="bloco" >        	
+			{{ form.blocoProj}}
+		</div>
+	</div></p>	
+    
+    <p><div class="field">
+		<label for="sala">Sala:</label>
+		<div class="sala" >        	
+			{{ form.salaProj}}
+		</div>
+	</div></p>
+	<div class ="campos">
+		{{ form.area }}
+		{{ form.nomeProj }}
+		{{ form.resumoProj }}
+		{{ form.materialProj }}
+		{{ form.campusProj }}
+		{{ form.equipamentoProj }}
+		{{ form.codProj }}
+		{{ form.situacao }}
+		{{ form.criador }}
+        {{ form.enviar }}
+	</div>
+	<p><input id="botao" type="button" name="Submit" value="Salvar" onclick="Enviar();">
+    - <input id="botao" type="button" name="Submit" value="Salvar e Enviar" onclick="EnviarUsuario();">
+    - <input type="button" value="Voltar" onClick="history.go(-1)"></a></p>
+</form>
+{% endblock %}

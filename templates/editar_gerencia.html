@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Gerencia - Avaliação </center>
+{% endblock subtitle %}
+{% block conteudo %}
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<script type="text/javascript" src="{{MEDIA_URL}}validarFeitec.js"></script>
+<h3><b>Nome do Projeto :</b> {{ projeto.nomeProj }}</h3>
+
+<p><b>Área:</b>{{ projeto.area }}</p>
+<p><b>Campus:</b> {{ projeto.campusProj }}</p>
+<p><b>Resumo:</b> {{ projeto.resumoProj }}</p>
+<p><b>Material a ser Adquirido:</b> {{ projeto.materialProj }}</p>
+<p><b>Equipamento Necessário:</b> {{ projeto.equipamentoProj }}</p>
+
+<p>{% if professor %}
+    <h3> Professores: </h3>   
+	{% for dados in professor %}       
+        <p>         
+		<b>Nome :</b> {{ dados.nomeProfessor }}<br/>
+        <b>Email :</b> {{ dados.emailProfessor }}<br/>
+        <b>Tipo :</b> {{ dados.tipoProfessor}}<br/>
+        <b>Matrícula ISAPE :</b> {{ dados.matriculaProfessor }}<br/>
+		</p> 
+    {% endfor %}
+{% endif %}</p>
+        
+<p>{% if integrante %}
+    <h3> Integrantes: </h3>  
+	{% for dados in integrante %}
+        <p> 
+		<b>Nome :</b> {{ dados.nomeIntegrante }}<br/>
+        <b>CPF :</b> {{ dados.cpfIntegrante }}<br/>
+        <b>Curso :</b> {{ dados.cursoIntegrante }}<br/>
+        <b>Matrícula :</b> {{ dados.matriculaIntegrante }}<br/>
+		<b>Curso :</b> {{ dados.cursoIntegrante }}<br/>
+        <b>Campus :</b> {{ dados.campusIntegrante }}<br/>
+		<b>Tamanho Camisa :</b> {{ dados.tamanhocamisaIntegrante }}<br/>
+        </p>
+	{% endfor %}
+{% endif %}</p>
+
+<form id="formGerencia" name="formGerencia" action="/editar_gerencia/{{ codigo }}/" method="POST">{% csrf_token %}
+    <p><div class="field"> 
+		<label for="bloco"><b>Bloco: </b></label>
+		<div class="bloco" >        	
+			{{ form.blocoProj}}
+		</div>
+	</div></p>	
+    
+    <p><div class="field">
+		<label for="sala"><b>Sala:</b> </label>
+		<div class="sala" >        	
+			{{ form.salaProj}}
+		</div>
+	</div></p>
+	<div class ="campos">
+		{{ form.area }}
+		{{ form.nomeProj }}
+		{{ form.resumoProj }}
+		{{ form.materialProj }}
+		{{ form.campusProj }}
+		{{ form.equipamentoProj }}
+		{{ form.codProj }}
+		{{ form.situacao }}
+		{{ form.criador }}
+	</div>
+	<p><input id="botao" type="button" name="Submit" value="Aprovado" onclick="gerenciaAprovar();">
+	- <input id="botao" type="button" name="Submit" value="Não Aprovado" onclick="gerenciaReprovar();">
+    - <a href="/principal"><input id="botao" type="button" name="Submit" value="Voltar"></a></p>
+</form>
+{% endblock %}

@@ -1,0 +1,9 @@
+ body{     
+             margin: 0px;
+  padding: 0px;
+  font-size: 12px;
+  background-color: black;
+  color: white;            
+            background:green;
+			background-image:url(certificado.jpg);
+	}

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Alterar Dados do Projeto </center>
+{% endblock subtitle %}
+{% block conteudo %}
+<form id="formAlterar" name="formAlterar" action="/mostra_dados/{{ codigo }}/" method="POST">{% csrf_token %}
+            <h1>Alterar Dados</h1>	
+			{{ form.non_field_errors}}
+
+			<p><div class="field">
+        		{{ form.area.errors }}
+       			<label for="area">Área:</label>
+					<div class="area" id="area">        	
+	            		{{ form.area}}
+    				</div>
+                <FONT face= "Arial " SIZE=2 COLOR= "#CCCCCC ">Escolha uma área ao seu Projeto</FONT> 
+			</div></p>
+
+            <p><div class="field">
+        		{{ form.campus.errors }}
+       			<label for="campusProj">Campus:</label>
+					<div class="campus" id="campusProj">        	
+	            		{{ form.campusProj}}
+    				</div>
+                <FONT face= "Arial " SIZE=2 COLOR= "#CCCCCC ">Escolha o campus ao qual seu Projeto pertence</FONT> 
+			</div></p>
+
+			<p><div class="field" >
+       			<label for="nomeProj">Nome do Projeto:</label>
+					<div class="campo" id="nomeProj">        		
+						{{form.nomeProj}}
+					</div>
+                <FONT face= "Arial " SIZE=2 COLOR= "#CCCCCC ">Digite um nome ao seu Projeto</FONT> 		
+			</div></p>
+    		
+			<p><div class="field">
+        		{{ form.resumo.errors }}
+        		<label  for="resumoProj">Resumo do Projeto:</label>
+					<div class="campo" id="resumoProj">    
+						{{form.resumoProj}}
+    				</div>
+                <FONT face= "Arial " SIZE=2 COLOR= "#CCCCCC ">Faça um breve resumo do Projeto</FONT> 
+   			</div></p>
+
+			<p><div class="field">
+        		{{ form.materialProj.errors }}
+        		<label for="materialProj">Material a ser Adquirido:</label>
+					<div class="campo" id="materialProj">        		
+						{{ form.materialProj }}
+    				</div>
+                <FONT face= "Arial " SIZE=2 COLOR= "#CCCCCC ">Materias a serem adquiridos para o Projeto</FONT> 
+			</div></p>
+			
+			<p><div class="field">
+        		{{ form.materialAV.errors }}
+       			<label for="materialAVProj">Equipamentos Necessários:</label>
+					<div class="materialAV" id="materialAVProj">        	
+	            		{{ form.materialAVProj}}
+    				</div>
+                <FONT face= "Arial " SIZE=2 COLOR= "#CCCCCC ">Equipamentos necessários para o Projeto</FONT> 
+			</div></p>
+	
+			{{ form.codProj }}
+			{{ form.situacao}}
+			{{ form.criador}}
+			{{ form.salaProj}}
+            {{ form.blocoProj}}
+
+			{% if formset2 %}
+			    <p><h3>Cadastro de Professores e Coordenadores</h3>
+			    <div>
+				    {{ formset2.management_form }}
+        			{% for professor in formset2.forms %}
+           	 			<ul>
+						    {{ professor.codProfessor }}
+                			<li>Participação : {{ professor.tipoProfessor }}</li>
+                			<li>Nome : {{ professor.nomeProfessor }}</li>
+						    <li>Email : {{ professor.emailProfessor }}</li>
+                            <li>Matrícula SIAPE : {{ professor.matriculaProfessor }}</li>
+                            <li>Apagar? : {{professor.DELETE}}
+            			</ul>
+        			{% endfor %}
+			    </div></p>
+            {% else %}
+                {{ formset2.management_form }}
+            {% endif %}
+            
+            {% if formset %}
+			    <p><h3>Cadastro de Integrantes</h3>
+            {% else %}
+                {{ formset.management_form }}
+            {% endif %}
+			    <div>
+				    {{ formset.management_form }}
+        			{% for integrante in formset.forms %}
+           	 			<ul>
+						    {{ integrante.codIntegrante }}
+                			<li>Nome : {{ integrante.nomeIntegrante }}</li>
+                            <li>Matrícula : {{ integrante.matriculaIntegrante }}</li>
+                			<li>CPF : {{ integrante.cpfIntegrante }}</li>
+						    <li>Curso : {{ integrante.cursoIntegrante }}</li>
+                            <li>Campus : {{ integrante.campusIntegrante }}</li>
+						    <li>Tamanho Camisa : {{ integrante.tamanhocamisaIntegrante }}</li>
+                            <li>Apagar? : {{ integrante.DELETE }}
+            			</ul>
+        			{% endfor %}
+			    </div></p>
+
+			<input id="botao" type="button" name="Submit" value="Salvar" onclick="validaCamposS();">
+			<input id="botao" type="button" name="Submit" value="Enviar" onclick="validaCamposE();">
+            <a href="/apagar_projeto/{{ codigo }}/">Excluir</a>
+</form>
+<a href="/principal">Voltar</a>
+{% endblock %}

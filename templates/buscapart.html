@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Consultar Participante </center>
+{% endblock subtitle %}
+{% block conteudo %}
+		<form id="form" action="/busca_participante/" method="POST"> {% csrf_token %} 
+        	
+            Digite o Nome do Participante a ser pesquisado:<br>            
+            <input type="text" id="nome" name="nome" >
+		    <input id="botao" type="Submit" name="Submit" value="Consultar">	
+        </form>
+      
+      {% for dados in part %}
+            {% if dados.situacaoIntegrante == "Apresentou" %}
+                Certificado em PDF:   <a href="/emitir/{{dados.codIntegrante}}/">{{ dados.nomeIntegrante }}   </a> <br><br>
+            {% else %}
+                {{dados.nomeIntegrante}} não participou da apresentação do projeto.  <br><br>
+            {% endif %}                       
+    {% endfor %}
+
+    <p><a href="/principal_certificado"><input id="botao" type="button" name="Submit" value="Certificados"></a></p>
+{% endblock %}

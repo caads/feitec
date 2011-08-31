@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Editar Situação </center>
+{% endblock subtitle %}
+{% block conteudo %}
+<h3>Formulário de Apresentação do Integrante</h3>
+{% if integrante %} 
+    <ul>           
+		<li>Nome : {{integrante.nomeIntegrante }}</li>
+        <li>CPF : {{ integrante.cpfIntegrante }}</li>
+        <li>Curso : {{ integrante.cursoIntegrante }}</li>
+        <li>Matrícula : {{ integrante.matriculaIntegrante }}</li>
+        <li>Campus : {{ integrante.campusIntegrante }}</li>
+		<li>Tamanho Camisa : {{ integrante.tamanhocamisaIntegrante }}</li>
+    </ul>
+{% endif %}
+<form id="form" name="form" action="/editar_integrante/{{ codigo }}/" method="POST">{% csrf_token %}
+<div class="field">
+		<label for="Situacao Integrante">Situação:</label>
+		<div class="situacao" >        	
+			{{ form.situacaoIntegrante}}
+		</div>
+</div>
+
+	<div class ="campos">
+        {{ form.codIntegrante }}
+		{{ form.nomeIntegrante }}
+		{{ form.cpfIntegrante }}
+        {{ form.cursoIntegrante }}
+        {{ form.campusIntegrante }}
+        {{ form.matriculaIntegrante }}
+        {{ form.tamanhocamisaIntegrante}}
+        {{ form.projeto }}
+    </div>
+
+	<p><input id="botao" type="Submit" name="Submit" value="Enviar"> - <input type="button" value="Voltar" onClick="history.go(-1)"></p>
+</form>
+{% endblock %}

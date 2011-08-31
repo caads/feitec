@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Alterar Dados do Projeto - Feitec </center>
+{% endblock subtitle %}
+{% block conteudo %}
+       <script type="text/javascript" src="{{MEDIA_URL}}validarFeitec.js"></script>
+       <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+       <form id="formAlterar" name="formAlterar" action="/mostra_dados_projeto/{{ codigo }}/" method="POST">{% csrf_token %}
+            <h1>Alterar Dados</h1>	
+			{{ form.non_field_errors}}
+
+			<p><div class="field">
+        		{{ form.area.errors }}
+       			<label for="area"><b>Área:</b></label>
+					<div class="area" id="area">        	
+	            		{{ form.area}}
+    				</div>
+                <FONT face= "Arial " SIZE=2 COLOR= "#CCCCCC ">Escolha uma área ao seu Projeto</FONT> 
+			</div></p>
+
+            <p><div class="field">
+        		{{ form.campus.errors }}
+       			<label for="campusProj"><b>Campus:</b></label>
+					<div class="campus" id="campusProj">        	
+	            		{{ form.campusProj}}
+    				</div>
+                <FONT face= "Arial " SIZE=2 COLOR= "#CCCCCC ">Escolha o campus ao qual seu Projeto pertence</FONT> 
+			</div></p>
+
+			<p><div class="field" >
+       			<label for="nomeProj"><b>Nome do Projeto:</b></label>
+					<div class="campo" id="nomeProj">        		
+						{{form.nomeProj}}
+					</div>
+                <FONT face= "Arial " SIZE=2 COLOR= "#CCCCCC ">Digite um nome ao seu Projeto</FONT> 		
+			</div></p>
+    		
+			<p><div class="field">
+        		{{ form.resumo.errors }}
+        		<label  for="resumoProj"><b>Resumo do Projeto:</b></label>
+					<div class="campo" id="resumoProj">    
+						{{form.resumoProj}}
+    				</div>
+                <FONT face= "Arial " SIZE=2 COLOR= "#CCCCCC ">Faça um breve resumo do Projeto</FONT> 
+   			</div></p>
+
+			<p><div class="field">
+        		{{ form.materialProj.errors }}
+        		<label for="materialProj"><b>Material a ser Adquirido:</b></label>
+					<div class="campo" id="materialProj">        		
+						{{ form.materialProj }}
+    				</div>
+                <FONT face= "Arial " SIZE=2 COLOR= "#CCCCCC ">Materias a serem adquiridos para o Projeto</FONT> 
+			</div></p>
+			
+			<p><div class="field">
+        		{{ form.equipamentoProj.errors }}
+       			<label for="equipamentoProj"><b>Equipamentos Necessários:</b></label>
+					<div class="equipamentoProj" id="equipamentoProj">        	
+	            		{{ form.equipamentoProj}}
+    				</div>
+                <FONT face= "Arial " SIZE=2 COLOR= "#CCCCCC ">Equipamentos necessários para o Projeto</FONT> 
+			</div></p>
+	
+			{{ form.codProj }}
+			{{ form.situacao }}
+			{{ form.criador }}
+			{{ form.salaProj }}
+            {{ form.blocoProj }}
+
+           {% if formset2 %}
+			    <p><h3>Cadastro de Professores e Coordenadores</h3>
+			    <div>
+				    {{ formset2.management_form }}
+        			{% for professor in formset2.forms %}
+           	 			<ul>
+						    {{ professor.codProfessor }}
+                			<b>Participação :</b> {{ professor.tipoProfessor }}<br/><br/>
+                			<b>Nome :</b> {{ professor.nomeProfessor }}<br/><br/>
+						    <b>Email :</b> {{ professor.emailProfessor }}<br/><br/>
+                            <b>Matrícula SIAPE :</b> {{ professor.matriculaProfessor }}<br/><br/>
+                            <b>Apagar? :</b> {{professor.DELETE}}
+            			</ul>
+        			{% endfor %}
+			    </div></p>
+            {% else %}
+                {{ formset2.management_form }}
+            {% endif %}
+            
+            {% if formset %}
+			    <p><h3>Cadastro de Integrantes</h3>
+            {% else %}
+                {{ formset.management_form }}
+            {% endif %}
+			    <div>
+				    {{ formset.management_form }}
+        			{% for integrante in formset.forms %}
+           	 			<ul>
+						    {{ integrante.codIntegrante }}
+                			<b>Nome :</b> {{ integrante.nomeIntegrante }}<br/><br/>
+                            <b>Matrícula :</b> {{ integrante.matriculaIntegrante }}<br/><br/>
+                			<b>CPF :</b> {{ integrante.cpfIntegrante }}<br/><br/>
+						    <b>Curso :</b> {{ integrante.cursoIntegrante }}<br/><br/>
+                            <b>Campus :</b> {{ integrante.campusIntegrante }}<br/><br/>
+						    <b>Tamanho Camisa :</b> {{ integrante.tamanhocamisaIntegrante }}<br/><br/>
+                            <b>Apagar? :</b> {{ integrante.DELETE }}
+            			</ul>
+        			{% endfor %}
+			    </div></p>
+
+			<p><input id="botao" type="button" name="Submit" value="Salvar" onclick="EditarValidarCamposS();">
+			- <input id="botao" type="button" name="Submit" value="Enviar" onclick="EditarValidarCamposE();">
+            - <a href="/apagar_projeto/{{ codigo }}/"><input id="botao" type="button" name="Submit" value="Excluir"></a>
+            - <a href="/principal"><input id="botao" type="button" name="Submit" value="Voltar"></a><p>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Cadastro de Usuarios </center>
+{% endblock subtitle %}
+{% if form.errors %}
+   <p>Usuario e senha estao errados. Por favor, tente de novo!</p>
+{% endif %}
+{% block conteudo %}
+<center>
+<h3> Cadastro </h3></br>
+<form method="post" action="/cadastrar/"> {% csrf_token %}
+   <table class="form">
+       {{ form }}
+   </table><br/>
+<p><input type="submit" value="Cadastrar"> - <a href="/"><input id="botao" type="button" name="Submit" value="Voltar"></a></p>
+</form>
+</center>
+{% endblock conteudo %}
+
+

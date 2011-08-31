@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Alterar Senha Concluido </center>
+{% endblock subtitle %}
+{% load i18n %}
+{% block titulo %}{% trans "Senha alterada" %} - {{ block.super }}{% endblock %}
+{% block h1 %}{% trans "Senha alterada" %}{% endblock %}
+{% block conteudo %}{{ block.super }}
+<b>A sua senha foi alterada com sucesso!</b>
+<p><a href="/"><input id="botao" type="button" name="Submit" value="Página Principal"></a></p>
+{% endblock conteudo %}
+

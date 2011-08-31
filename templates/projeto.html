@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Projeto - Feitec </center>
+{% endblock subtitle %}
+{% block conteudo %}
+<h3> Projeto Feitec: </h3> 
+<p>Nome:{{ projeto.nomeProj }}</p>
+<p>Área:{{ projeto.area }}</p>
+<p>Campus: {{ projeto.campusProj }}</p>
+<p>Sala: {{ projeto.salaProj }}</p>
+<p>Bloco: {{ projeto.blocoProj }}</p>
+<p>Resumo: {{ projeto.resumoProj }}</p>
+<p>Material a ser Adquirido:{{ projeto.materialProj }}</p>
+<p>Equipamento Necessário : {{ projeto.equipamentoProj }}</p>
+<p>{% if professor %}
+    <h3> Professores: </h3>   
+	{% for dados in professor %}       
+        <p><ul>         
+		<li>Nome : {{ dados.nomeProfessor }}</li>
+        <li>Email : {{ dados.emailProfessor }}</li>
+        <li>Tipo : {{ dados.tipoProfessor}}</li>
+        <li>Matrícula SIAPE : {{ dados.matriculaProfessor }}</li>
+		</ul></p> 
+    {% endfor %}
+{% endif %}</p>
+        
+<p>{% if integrante %}
+    <h3> Integrantes: </h3>  
+	{% for dados in integrante %}
+        <p><ul> 
+		<li>Nome : {{ dados.nomeIntegrante }}</li>
+        <li>CPF : {{ dados.cpfIntegrante }}</li>
+        <li>Curso : {{ dados.cursoIntegrante }}</li>
+        <li>Matrícula : {{ dados.matriculaIntegrante }}</li>
+        <li>Campus : {{ dados.campusIntegrante }}</li>
+		<li>Tamanho Camisa : {{ dados.tamanhocamisaIntegrante }}</li>
+        {% if projeto.situacao == "Aprovado" %}
+            <li>Situação : {{ dados.situacaoIntegrante }}
+            <a href="/editar_integrante/{{ dados.codIntegrante }}/">Editar situação</a>
+        {% endif %}</ul></p>
+	{% endfor %}
+{% endif %}</p><br>
+<p><a href="/"><input id="botao" type="button" name="Submit" value="Voltar"></a></p>
+{% endblock %}
+

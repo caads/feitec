@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Certificados </center>
+{% endblock subtitle %}
+{% block conteudo %}
+  <h3> Alunos:</h3>
+  <a href="/todos_participantes/">Exibir todos alunos</a> <br><br>
+  <a href="/busca_participante/">Consultar Alunos</a><br><br>
+
+  <h3>  Professores:</h3>
+  <a href="/todos_professores/">Exibir todos professores</a> <br><br>
+  <a href="/busca_professor/">Consultar Professor</a> <br><br>
+
+ <p><a href="{% url projeto.views.principal %}"><input id="botao" type="button" name="Submit" value="Página Principal"></a></p>
+{% endblock %}

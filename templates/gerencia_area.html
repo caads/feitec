@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Pagina Principal </center>
+{% endblock subtitle %}
+{% block conteudo %}
+<h3>Projetos:</h3>
+    <b>Projetos Enviados:</b>		
+    {% for dados in projeto %}
+        {% if dados.situacao == "Enviado" %}
+		    <p>
+		    <a href="/editar_gerencia/{{ dados.codProj }}/">{{ dados.nomeProj }}</a>
+		    </p>
+        {% endif %}
+	{% endfor %} 
+    <br><br>
+
+    <b> Projetos Aprovados: {{cont}}</b>       
+    {% for dados in projeto %}
+        {% if dados.situacao == "Aprovado" %}
+		    <p>
+			<a href="/editar_gerencia2/{{ dados.codProj }}/">{{ dados.nomeProj }}</a>
+			</p>
+		{% endif %}
+    {% endfor %} 
+    <br><br>
+
+    <b> Projetos Reprovados: </b>       
+    {% for dados in projeto %}
+        {% if dados.situacao == "Reprovado" %}
+			<p>
+			<a href="/projeto/{{ dados.codProj }}/">{{ dados.nomeProj }}</a>
+			</p>
+		{% endif %}
+    {% endfor %}    
+    <br><br>
+    <a href="{% url projeto.views.principal %}">Clique Aqui para voltar para a Página Principal<br />
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block subtitle %}
+    <center> Consultar Professor </center>
+{% endblock subtitle %}
+{% block conteudo %}
+		<form id="form" action="/busca_professor/" method="POST"> {% csrf_token %} 
+        	Digite o Nome do Professor a ser pesquisado:<br>            
+            <input type="text" id="nome" name="nome" >
+		    <input id="botao" type="Submit" name="Submit" value="Consultar">	
+        </form>
+        {% for dados in prof %}
+         Certificado em PDF: <a href="/emitir_prof/{{dados.codProfessor}}/">{{ dados.nomeProfessor }} </a> <br><br>
+        {% endfor %}
+
+        <p><a href="/principal_certificado"><input id="botao" type="button" name="Submit" value="Certificados"></a></p>
+{% endblock %}
